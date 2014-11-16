@@ -1,6 +1,8 @@
 
 package weather;
 
+import java.util.LinkedList;
+
 public class Populator
 {
 
@@ -11,9 +13,11 @@ public class Populator
 
 		// Set up connection to NDFD
 		// TODO: Sean
+		NDFDConnection ndfd = new NDFDConnection();
 
 		// Pull data from NDFD
 		// TODO: Sean
+		LinkedList<WeatherPoint> newData = ndfd.pullData();
 
 		// Add new data received from NDFD to voltDB
 		// TODO: Will
