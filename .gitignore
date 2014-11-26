@@ -1,2 +1,7 @@
 bin/
-
+src/voltDb/voltdbroot
+src/voltDb/statement-plans
+src/voltDb/catalog.jar
+src/voltDb/log
+src/voltDb/weatherpoints.jar
+src/voltDb/catalog-report.html
