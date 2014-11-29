@@ -101,6 +101,38 @@ public class VoltDbConnection {
 		return wps;
 	}
 	
+	/** 
+	 * Selects a specfic set of weather points
+	 * @param where String containing a valid SQL WHERE clause.
+	 * @return A list of all weather points matching the WHERE clause
+	 */
+	public LinkedList<WeatherPoint> getWeatherPointsWhere(String where) {
+		ResultSet res = null;
+		LinkedList<WeatherPoint> wps = new LinkedList();
+		String sql = "SELECT * FROM weatherpoints WHERE " + where;
+		
+		/* Get result set */
+		try {
+			Statement query = conn.createStatement();
+			res = query.executeQuery(sql);
+		} catch (SQLException e) {
+			System.err.println("Error running sql statement");
+			e.printStackTrace();
+		}
+		
+		/* Convert the ResultSet into an array of WeatherPoints */
+		try {
+			while(res.next()) {
+				wps.add(resultToWeatherPoint(res));
+			}
+		} catch (SQLException e) {
+			System.err.println("Error reading ResultSet");
+			e.printStackTrace();
+		}
+		
+		return wps;
+	}
+	
 	/**
 	 * Converts the database entry pointed to by the current position of the result set into a WeatherPoint object
 	 * @param res

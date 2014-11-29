@@ -22,8 +22,8 @@ public class TestConnection {
 		/* Create a weather point */
 		WeatherPoint wp = new WeatherPoint();
 		wp.cloudAmount = 50;
-		wp.maxTemp = 9001;
-		wp.mintemp = 42;
+		wp.maxTemp = 1;
+		wp.mintemp = 36;
 		System.out.println("Built weatherpoint");
 		
 		/* Insert weather point into database */
@@ -31,8 +31,38 @@ public class TestConnection {
 		//System.out.println("Wrote weatherpoint to VoltDB");
 		
 		/* Get contents of database */
+		System.out.println("All database entries: ");
 		LinkedList<WeatherPoint> rs = conn.getAllWeatherPoints();
 		for(WeatherPoint pt : rs) {
+			// TODO: Add toString method for WeatherPoint
+			System.out.print("maxTemp = " + pt.maxTemp);
+			System.out.print(" mintemp = " + pt.mintemp);
+			System.out.print(" dewPointTemp = " + pt.dewPointTemp);
+			System.out.print(" heatIndexTemp = " + pt.heatIndexTemp);
+			System.out.print(" windChillTemp = " + pt.windChillTemp);
+			System.out.print(" rainAmount = " + pt.rainAmount);
+			System.out.print(" snowAmount = " + pt.snowAmount);
+			System.out.print(" probabilityOfPrecipitation = " + pt.probabilityOfPrecipitation);
+			System.out.print(" outlookPercent = " + pt.outlookPercent);
+			System.out.print(" tornadoPercent = " + pt.tornadoPercent);
+			System.out.print(" hailPercent = " + pt.hailPercent);
+			System.out.print(" damagingThunderstormWindPercent = " + pt.damagingThunderstormWindPercent);
+			System.out.print(" extremeTornadoesPercent = " + pt.extremeTornadoesPercent);
+			System.out.print(" extremeHailPercent = " + pt.extremeHailPercent);
+			System.out.print(" extremeThunderstormWindsPercent = " + pt.extremeThunderstormWindsPercent);
+			System.out.print(" severeThunderstormPercent = " + pt.severeThunderstormPercent);
+			System.out.print(" extremeSevereThunderstormPercent = " + pt.extremeSevereThunderstormPercent);
+			System.out.print(" sustainedWindSpeed = " + pt.sustainedWindSpeed);
+			System.out.print(" cumulative34WindSpeed = " + pt.cumulative34WindSpeed);
+			System.out.print(" gustWindSpeed = " + pt.gustWindSpeed);
+			System.out.print(" windDirection = " + pt.windDirection);
+			System.out.print(" cloudAmount = " + pt.cloudAmount + "\n"); 
+		}
+		
+		System.out.println("\nSpecific entries: ");
+		rs = conn.getWeatherPointsWhere("maxTemp=9001");
+		for(WeatherPoint pt : rs) {
+			// TODO: Add toString method for WeatherPoint
 			System.out.print("maxTemp = " + pt.maxTemp);
 			System.out.print(" mintemp = " + pt.mintemp);
 			System.out.print(" dewPointTemp = " + pt.dewPointTemp);
