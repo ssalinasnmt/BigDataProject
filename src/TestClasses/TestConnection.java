@@ -1,5 +1,8 @@
 package TestClasses;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import voltDb.VoltDbConnection;
 import weather.WeatherPoint;
 
@@ -25,6 +28,17 @@ public class TestConnection {
 		/* Insert weather point into database */
 		conn.addRecord(wp);
 		System.out.println("Wrote weatherpoint to VoltDB");
+		
+		/* Get contents of database */
+		ResultSet rs = conn.getWeatherPoints();
+		try {
+			while(rs.next()) {
+				System.out.println("maxTemp = " + rs.getInt("maxTemp"));
+			}
+		} catch (SQLException e) {
+			System.out.println("Error printing contents of table");
+			e.printStackTrace();
+		}
 	}
 
 }

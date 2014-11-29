@@ -68,4 +68,24 @@ public class VoltDbConnection {
         	e.printStackTrace();
         }
 	}
+	
+	/**
+	 * Gets all weatherpoints from the database. 
+	 * @return
+	 */
+	public ResultSet getWeatherPoints() {
+		ResultSet res = null;
+		String sql = "SELECT * FROM weatherpoints";
+		
+		Statement query;
+		try {
+			query = conn.createStatement();
+			res = query.executeQuery(sql);
+		} catch (SQLException e) {
+			System.err.println("Error running sql statement");
+			e.printStackTrace();
+		}
+		
+		return res;
+	}
 }
