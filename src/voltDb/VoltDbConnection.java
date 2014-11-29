@@ -1,6 +1,7 @@
 package voltDb;
 
 import java.sql.*;
+import java.util.LinkedList;
 
 import weather.WeatherPoint; 
 
@@ -73,19 +74,68 @@ public class VoltDbConnection {
 	 * Gets all weatherpoints from the database. 
 	 * @return
 	 */
-	public ResultSet getWeatherPoints() {
+	public LinkedList<WeatherPoint> getAllWeatherPoints() {
 		ResultSet res = null;
+		LinkedList<WeatherPoint> wps = new LinkedList();
 		String sql = "SELECT * FROM weatherpoints";
 		
-		Statement query;
+		/* Get result set */
 		try {
-			query = conn.createStatement();
+			Statement query = conn.createStatement();
 			res = query.executeQuery(sql);
 		} catch (SQLException e) {
 			System.err.println("Error running sql statement");
 			e.printStackTrace();
 		}
 		
-		return res;
+		/* Convert the ResultSet into an array of WeatherPoints */
+		try {
+			while(res.next()) {
+				wps.add(resultToWeatherPoint(res));
+			}
+		} catch (SQLException e) {
+			System.err.println("Error reading ResultSet");
+			e.printStackTrace();
+		}
+		
+		return wps;
+	}
+	
+	/**
+	 * Converts the database entry pointed to by the current position of the result set into a WeatherPoint object
+	 * @param res
+	 * @return
+	 */
+	private WeatherPoint resultToWeatherPoint(ResultSet res) {
+		WeatherPoint wp = new WeatherPoint();
+		
+		try {
+			wp.maxTemp = res.getInt("maxTemp");
+			wp.mintemp = res.getInt("mintemp");
+			wp.dewPointTemp = res.getInt("dewPointTemp");
+			wp.heatIndexTemp = res.getInt("heatIndexTemp");
+			wp.windChillTemp = res.getInt("windChillTemp");
+			wp.rainAmount = res.getInt("rainAmount");
+			wp.snowAmount = res.getInt("snowAmount");
+			wp.probabilityOfPrecipitation = res.getInt("probabilityOfPrecipitation");
+			wp.outlookPercent = res.getInt("outlookPercent");
+			wp.tornadoPercent = res.getInt("tornadoPercent");
+			wp.hailPercent = res.getInt("hailPercent");
+			wp.damagingThunderstormWindPercent = res.getInt("damagingThunderstormWindPercent");
+			wp.extremeTornadoesPercent = res.getInt("extremeTornadoesPercent");
+			wp.extremeHailPercent = res.getInt("extremeHailPercent");
+			wp.extremeThunderstormWindsPercent = res.getInt("extremeThunderstormWindsPercent");
+			wp.severeThunderstormPercent = res.getInt("severeThunderstormPercent");
+			wp.extremeSevereThunderstormPercent = res.getInt("extremeSevereThunderstormPercent");
+			wp.sustainedWindSpeed = res.getInt("sustainedWindSpeed");
+			wp.cumulative34WindSpeed = res.getInt("cumulative34WindSpeed");
+			wp.gustWindSpeed = res.getInt("gustWindSpeed");
+			wp.windDirection = res.getInt("windDirection");
+			wp.cloudAmount = res.getInt("cloudAmount");
+		} catch(SQLException e) {
+			System.err.println("Error getting column");
+			e.printStackTrace();
+		}
+		return wp;
 	}
 }

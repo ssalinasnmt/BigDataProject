@@ -2,6 +2,7 @@ package TestClasses;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import voltDb.VoltDbConnection;
 import weather.WeatherPoint;
@@ -26,18 +27,34 @@ public class TestConnection {
 		System.out.println("Built weatherpoint");
 		
 		/* Insert weather point into database */
-		conn.addRecord(wp);
-		System.out.println("Wrote weatherpoint to VoltDB");
+		//conn.addRecord(wp);
+		//System.out.println("Wrote weatherpoint to VoltDB");
 		
 		/* Get contents of database */
-		ResultSet rs = conn.getWeatherPoints();
-		try {
-			while(rs.next()) {
-				System.out.println("maxTemp = " + rs.getInt("maxTemp"));
-			}
-		} catch (SQLException e) {
-			System.out.println("Error printing contents of table");
-			e.printStackTrace();
+		LinkedList<WeatherPoint> rs = conn.getAllWeatherPoints();
+		for(WeatherPoint pt : rs) {
+			System.out.print("maxTemp = " + pt.maxTemp);
+			System.out.print(" mintemp = " + pt.mintemp);
+			System.out.print(" dewPointTemp = " + pt.dewPointTemp);
+			System.out.print(" heatIndexTemp = " + pt.heatIndexTemp);
+			System.out.print(" windChillTemp = " + pt.windChillTemp);
+			System.out.print(" rainAmount = " + pt.rainAmount);
+			System.out.print(" snowAmount = " + pt.snowAmount);
+			System.out.print(" probabilityOfPrecipitation = " + pt.probabilityOfPrecipitation);
+			System.out.print(" outlookPercent = " + pt.outlookPercent);
+			System.out.print(" tornadoPercent = " + pt.tornadoPercent);
+			System.out.print(" hailPercent = " + pt.hailPercent);
+			System.out.print(" damagingThunderstormWindPercent = " + pt.damagingThunderstormWindPercent);
+			System.out.print(" extremeTornadoesPercent = " + pt.extremeTornadoesPercent);
+			System.out.print(" extremeHailPercent = " + pt.extremeHailPercent);
+			System.out.print(" extremeThunderstormWindsPercent = " + pt.extremeThunderstormWindsPercent);
+			System.out.print(" severeThunderstormPercent = " + pt.severeThunderstormPercent);
+			System.out.print(" extremeSevereThunderstormPercent = " + pt.extremeSevereThunderstormPercent);
+			System.out.print(" sustainedWindSpeed = " + pt.sustainedWindSpeed);
+			System.out.print(" cumulative34WindSpeed = " + pt.cumulative34WindSpeed);
+			System.out.print(" gustWindSpeed = " + pt.gustWindSpeed);
+			System.out.print(" windDirection = " + pt.windDirection);
+			System.out.print(" cloudAmount = " + pt.cloudAmount + "\n"); 
 		}
 	}
 
