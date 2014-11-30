@@ -128,7 +128,7 @@ public class NDFDConnection
 				{
 					Node attribute = data.item(i);
 
-					System.out.println("Examining node " + attribute.getNodeName());
+					// System.out.println("Examining node " + attribute.getNodeName());
 
 					if (attribute.getNodeName().compareTo("temperature") == 0)
 					{
