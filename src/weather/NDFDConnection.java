@@ -7,6 +7,16 @@ import java.net.URL;
 import java.nio.CharBuffer;
 import java.util.LinkedList;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 public class NDFDConnection
 {
 	public NDFDConnection()
@@ -22,6 +32,8 @@ public class NDFDConnection
 		String zipcodeList = "87801";
 
 		// Next, the parameters that we wish to pull from the NDFD.  The available parameters are as follows:
+		// Source: http://graphical.weather.gov/xml/docs/elementInputNames.php
+		// 
 		// maxt - Maximum Temperature
 		// mint - Minimum Temperature
 		// temp - 3 Hourly Temperature
@@ -91,37 +103,20 @@ public class NDFDConnection
 
 		// Instantiate a URL with it.
 		URL requestURL = null;
-		InputStreamReader xmlResponse = null;
 
 		try
 		{
 
+			System.out.println("Attempting connection to NDFD.");
 			requestURL = new URL(requestURLString);
-			xmlResponse = new InputStreamReader(requestURL.openStream());
 
-			// Allocate a character buffer to use.
-			// In testing, a response didn't use more than 11k, so 64k should be satisfactory for our needs.
-			// Might have to increase this later.
-			CharBuffer xml = CharBuffer.allocate(65536);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.parse(requestURL.openStream());
 
-			int charsRead = 0;
-			while (true)
-			{
-				// Read the XML from the response.
-				charsRead = xmlResponse.read(xml);
-				if (charsRead == -1)
-					break;
-			}
+			doc.getDocumentElement().normalize();
 
-			// Close the connection, we're done with it.
-			xmlResponse.close();
-
-			System.out.println("Successfully read " + xml.position());
-
-			// Get the character buffer ready for reading.
-			xml.flip();
-
-			// TODO: Parse the XML
+			// Ready to look for our data points at this stage.
 
 		}
 		catch (MalformedURLException e)
@@ -129,6 +124,14 @@ public class NDFDConnection
 			e.printStackTrace();
 		}
 		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{
+			e.printStackTrace();
+		}
+		catch (SAXException e)
 		{
 			e.printStackTrace();
 		}
