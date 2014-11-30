@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.CharBuffer;
 import java.util.LinkedList;
 
 public class NDFDConnection
@@ -78,7 +79,7 @@ public class NDFDConnection
 		// minrh - Minimum Relative Humidity
 
 		String[] parameters = { "maxt", "mint", "dew", "pop12", "qpf", "snow", "sky", "rh", "wspd", "wdir", "wgust", "ptornado", "phail", "ptstmwinds", "pxtornado", "pxhail", "pxtstmwinds", "ptotsvrtstm", "pxtotsvrtstm", "maxrh", "minrh" };
-		
+
 		String requestURLString = "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php?zipCodeList=" + zipcodeList + "&product=time-series&begin=" + beginTime + "&end=" + endTime;
 		for (String s: parameters)
 		{
@@ -86,18 +87,42 @@ public class NDFDConnection
 		}
 
 		// At this point, the request URL is ready.
-
 		System.out.println("Request URL: " + requestURLString);
+
+		// Instantiate a URL with it.
 		URL requestURL = null;
 		InputStreamReader xmlResponse = null;
 
 		try
 		{
+
 			requestURL = new URL(requestURLString);
 			xmlResponse = new InputStreamReader(requestURL.openStream());
 
-			// TODO: read the input stream, parse the resulting xml into objects.
-			// TODO: Perhaps move this into the pullData method below?
+			// Allocate a character buffer to use.
+			// In testing, a response didn't use more than 11k, so 64k should be satisfactory for our needs.
+			// Might have to increase this later.
+			CharBuffer xml = CharBuffer.allocate(65536);
+
+			int charsRead = 0;
+			while (true)
+			{
+				// Read the XML from the response.
+				charsRead = xmlResponse.read(xml);
+				if (charsRead == -1)
+					break;
+			}
+
+			// Close the connection, we're done with it.
+			xmlResponse.close();
+
+			System.out.println("Successfully read " + xml.position());
+
+			// Get the character buffer ready for reading.
+			xml.flip();
+
+			// TODO: Parse the XML
+
 		}
 		catch (MalformedURLException e)
 		{

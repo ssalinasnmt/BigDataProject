@@ -7,6 +7,7 @@ public class Populator
 
 	public static void main(String[] args)
 	{
+		System.out.println("Running NDFD Populator.");
 		// Set up the connection to VoltDB
 		// TODO: Will
 
