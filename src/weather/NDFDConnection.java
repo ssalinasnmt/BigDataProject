@@ -19,8 +19,10 @@ import org.xml.sax.SAXException;
 
 public class NDFDConnection
 {
-	public NDFDConnection()
+	public LinkedList <WeatherPoint> pullData()
 	{
+		LinkedList <WeatherPoint> newPoints = new LinkedList <WeatherPoint>();
+
 		// This will make a new connection to the NDFD database.
 
 		// Start and End times to pull for.  Note, this has to be in the future (because it's a forecast database)
@@ -122,6 +124,8 @@ public class NDFDConnection
 
 			for (int pointIndex = 0;pointIndex < points.getLength();pointIndex++)
 			{
+				System.out.println("Parsing " + points.getLength() + " data points.");
+
 				Node point = points.item(pointIndex);
 				NodeList data = point.getChildNodes();
 				for (int childNodeIndex = 0;childNodeIndex < data.getLength();childNodeIndex++)
@@ -376,12 +380,6 @@ public class NDFDConnection
 		{
 			e.printStackTrace();
 		}
-
-	}
-
-	public LinkedList <WeatherPoint> pullData()
-	{
-		LinkedList <WeatherPoint> newPoints = new LinkedList <WeatherPoint>();
 
 		return newPoints;
 	}
