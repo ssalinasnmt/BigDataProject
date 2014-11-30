@@ -38,6 +38,8 @@ public class NDFDConnection
 			requestURL = new URL(requestURLString);
 			xmlResponse = new InputStreamReader(requestURL.openStream());
 
+			// TODO: read the input stream, parse the resulting xml into objects.
+			// TODO: Perhaps move this into the pullData method below?
 		}
 		catch (MalformedURLException e)
 		{

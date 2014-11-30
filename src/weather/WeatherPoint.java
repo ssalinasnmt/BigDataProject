@@ -2,6 +2,8 @@ package weather;
 
 public class WeatherPoint
 {
+	// TODO: Check which of these can be pulled via forecast data.
+
 	// Temperature
 	public int maxTemp;
 	public int mintemp;
