@@ -134,6 +134,28 @@ public class NDFDConnection
 					{
 						System.out.println("Found a temperature.");
 						// Temperature can be max, min, or dew point.
+						for (int j = 0;j < attribute.getAttributes().getLength();j++)
+						{
+							Node n = attribute.getAttributes().item(j);
+							if (n.getNodeName().compareTo("type") == 0)
+							{
+								if (n.getNodeValue().compareTo("maximum") == 0)
+								{
+									System.out.println("Found maximum.");
+									break;
+								}
+								else if (n.getNodeValue().compareTo("minimum") == 0)
+								{
+									System.out.println("Found minimum");
+									break;
+								}
+								else if (n.getNodeValue().compareTo("dew point") == 0)
+								{
+									System.out.println("Found dew point.");
+									break;
+								}
+							}
+						}
 
 					}
 					else if (attribute.getNodeName().compareTo("precipitation") == 0)
