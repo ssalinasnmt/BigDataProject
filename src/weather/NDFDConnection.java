@@ -118,6 +118,21 @@ public class NDFDConnection
 
 			// Ready to look for our data points at this stage.
 
+			NodeList points = doc.getElementsByTagName("parameters");
+
+			for (int pointIndex = 0;pointIndex < points.getLength();pointIndex++)
+			{
+				Node point = points.item(pointIndex);
+				NodeList data = point.getChildNodes();
+				for (int i = 0;i < data.getLength();i++)
+				{
+					Node attribute = data.item(i);
+
+					System.out.println("Examining node " + attribute.getNodeName());
+
+				}
+			}
+
 		}
 		catch (MalformedURLException e)
 		{
