@@ -1,5 +1,9 @@
 package weather;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.LinkedList;
 
 public class NDFDConnection
@@ -17,13 +21,32 @@ public class NDFDConnection
 		String zipcodeList = "87801";
 
 		String[] parameters = { "maxt", "mint", "dew" };
-		String requestURL = "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php?zipCodeList=" + zipcodeList + "&product=time-series&begin=" + beginTime + "&end=" + endTime;
+		String requestURLString = "http://graphical.weather.gov/xml/sample_products/browser_interface/ndfdXMLclient.php?zipCodeList=" + zipcodeList + "&product=time-series&begin=" + beginTime + "&end=" + endTime;
 		for (String s: parameters)
 		{
-			requestURL = requestURL.concat("&" + s + "=" + s);
+			requestURLString = requestURLString.concat("&" + s + "=" + s);
 		}
 
 		// At this point, the request URL is ready.
+
+		System.out.println("Request URL: " + requestURLString);
+		URL requestURL = null;
+		InputStreamReader xmlResponse = null;
+
+		try
+		{
+			requestURL = new URL(requestURLString);
+			xmlResponse = new InputStreamReader(requestURL.openStream());
+
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
 
 	}
 
