@@ -124,9 +124,9 @@ public class NDFDConnection
 			{
 				Node point = points.item(pointIndex);
 				NodeList data = point.getChildNodes();
-				for (int i = 0;i < data.getLength();i++)
+				for (int childNodeIndex = 0;childNodeIndex < data.getLength();childNodeIndex++)
 				{
-					Node attribute = data.item(i);
+					Node attribute = data.item(childNodeIndex);
 
 					// System.out.println("Examining node " + attribute.getNodeName());
 
@@ -134,57 +134,222 @@ public class NDFDConnection
 					{
 						System.out.println("Found a temperature.");
 						// Temperature can be max, min, or dew point.
-						for (int j = 0;j < attribute.getAttributes().getLength();j++)
+						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
 						{
-							Node n = attribute.getAttributes().item(j);
+							Node n = attribute.getAttributes().item(nodeIndex);
 							if (n.getNodeName().compareTo("type") == 0)
 							{
 								if (n.getNodeValue().compareTo("maximum") == 0)
 								{
 									System.out.println("Found maximum.");
-									break;
 								}
 								else if (n.getNodeValue().compareTo("minimum") == 0)
 								{
 									System.out.println("Found minimum");
-									break;
 								}
 								else if (n.getNodeValue().compareTo("dew point") == 0)
 								{
 									System.out.println("Found dew point.");
-									break;
 								}
+								else
+								{
+									System.out.println("Found something else? Given " + n.getNodeValue());
+								}
+								break;
 							}
 						}
-
 					}
 					else if (attribute.getNodeName().compareTo("precipitation") == 0)
 					{
 						System.out.println("Found a precipitation.");
+						// Precipitation can be liquid or snow
+						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
+						{
+							Node n = attribute.getAttributes().item(nodeIndex);
+							if (n.getNodeName().compareTo("type") == 0)
+							{
+								if (n.getNodeValue().compareTo("liquid") == 0)
+								{
+									System.out.println("Found liquid.");
+								}
+								else if (n.getNodeValue().compareTo("snow") == 0)
+								{
+									System.out.println("Found snow");
+								}
+								else
+								{
+									System.out.println("Found something else? Given " + n.getNodeValue());
+								}
+								break;
+							}
+						}
 					}
 					else if (attribute.getNodeName().compareTo("wind-speed") == 0)
 					{
 						System.out.println("Found a wind speed.");
+
+						// Wind Speed can be sustained or gust
+						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
+						{
+							Node n = attribute.getAttributes().item(nodeIndex);
+							if (n.getNodeName().compareTo("type") == 0)
+							{
+								if (n.getNodeValue().compareTo("sustained") == 0)
+								{
+									System.out.println("Found sustained.");
+								}
+								else if (n.getNodeValue().compareTo("gust") == 0)
+								{
+									System.out.println("Found gust");
+								}
+								else
+								{
+									System.out.println("Found something else? Given " + n.getNodeValue());
+								}
+								break;
+							}
+						}
 					}
 					else if (attribute.getNodeName().compareTo("direction") == 0)
 					{
 						System.out.println("Found a direction.");
+						// Direction is only wind direction.
+						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
+						{
+							Node n = attribute.getAttributes().item(nodeIndex);
+							if (n.getNodeName().compareTo("type") == 0)
+							{
+								if (n.getNodeValue().compareTo("wind") == 0)
+								{
+									System.out.println("Found wind direction.");
+								}
+								else
+								{
+									System.out.println("Found something else? Given " + n.getNodeValue());
+								}
+								break;
+							}
+						}
 					}
 					else if (attribute.getNodeName().compareTo("cloud-amount") == 0)
 					{
 						System.out.println("Found a cloud amount.");
+						// Cloud amount can be only total cloud cover
+						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
+						{
+							Node n = attribute.getAttributes().item(nodeIndex);
+							if (n.getNodeName().compareTo("type") == 0)
+							{
+								if (n.getNodeValue().compareTo("total") == 0)
+								{
+									System.out.println("Found total cloud amount.");
+								}
+								else
+								{
+									System.out.println("Found something else? Given " + n.getNodeValue());
+								}
+								break;
+							}
+						}
 					}
 					else if (attribute.getNodeName().compareTo("probability-of-precipitation") == 0)
 					{
 						System.out.println("Found a probability of precipitation.");
+						// Probability of Precipitation is only 12-hour
+						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
+						{
+							Node n = attribute.getAttributes().item(nodeIndex);
+							if (n.getNodeName().compareTo("type") == 0)
+							{
+								if (n.getNodeValue().compareTo("12 hour") == 0)
+								{
+									System.out.println("Found 12 hour probability of precipiation.");
+								}
+								else
+								{
+									System.out.println("Found something else? Given " + n.getNodeValue());
+								}
+								break;
+							}
+						}
 					}
 					else if (attribute.getNodeName().compareTo("convective-hazard") == 0)
 					{
 						System.out.println("Found a convective hazard.");
+						// Convective Hazards can be many things.
+						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
+						{
+							Node n = attribute.getAttributes().item(nodeIndex);
+							if (n.getNodeName().compareTo("type") == 0)
+							{
+								if (n.getNodeValue().compareTo("tornadoes") == 0)
+								{
+									System.out.println("Found tornadoes.");
+								}
+								else if (n.getNodeValue().compareTo("hail") == 0)
+								{
+									System.out.println("Found hail");
+								}
+								else if (n.getNodeValue().compareTo("damaging thunderstorm winds") == 0)
+								{
+									System.out.println("Found damaging thunderstorm winds");
+								}
+								else if (n.getNodeValue().compareTo("extreme tornadoes") == 0)
+								{
+									System.out.println("Found extreme tornadoes");
+								}
+								else if (n.getNodeValue().compareTo("extreme hail") == 0)
+								{
+									System.out.println("Found extreme hail");
+								}
+								else if (n.getNodeValue().compareTo("extreme thunderstorm winds") == 0)
+								{
+									System.out.println("Found extreme thunderstorm winds");
+								}
+								else if (n.getNodeValue().compareTo("severe thunderstorms") == 0)
+								{
+									System.out.println("Found severe thunderstorms");
+								}
+								else if (n.getNodeValue().compareTo("extreme severe thunderstorms") == 0)
+								{
+									System.out.println("Found extreme severe thunderstorms");
+								}
+								else
+								{
+									System.out.println("Found something else? Given " + n.getNodeValue());
+								}
+								break;
+							}
+						}
 					}
 					else if (attribute.getNodeName().compareTo("humidity") == 0)
 					{
 						System.out.println("Found a humidity.");
+						// Humidity can be relative, max, or min.
+						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
+						{
+							Node n = attribute.getAttributes().item(nodeIndex);
+							if (n.getNodeName().compareTo("type") == 0)
+							{
+								if (n.getNodeValue().compareTo("relative") == 0)
+								{
+									System.out.println("Found relative.");
+								}
+								else if (n.getNodeValue().compareTo("minimum relative") == 0)
+								{
+									System.out.println("Found minimum");
+								}
+								else if (n.getNodeValue().compareTo("maximum relative") == 0)
+								{
+									System.out.println("Found maximum.");
+								}
+								else
+								{
+									System.out.println("Found something else? Given " + n.getNodeValue());
+								}
+								break;
+							}
+						}
 					}
 					else
 					{
