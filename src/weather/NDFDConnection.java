@@ -126,6 +126,8 @@ public class NDFDConnection
 			{
 				System.out.println("Parsing " + points.getLength() + " data points.");
 
+				WeatherPoint wp = new WeatherPoint();
+
 				Node point = points.item(pointIndex);
 				NodeList data = point.getChildNodes();
 				for (int childNodeIndex = 0;childNodeIndex < data.getLength();childNodeIndex++)
@@ -146,6 +148,8 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("maximum") == 0)
 								{
 									System.out.println("Found maximum.");
+									// wp.maxTemp = Integer.parseInt(attribute.getChildNodes().item(0).getTextContent());
+									System.out.println("Maximum: " + wp.maxTemp);
 								}
 								else if (n.getNodeValue().compareTo("minimum") == 0)
 								{
@@ -361,6 +365,8 @@ public class NDFDConnection
 					}
 
 				}
+
+				newPoints.add(wp);
 			}
 
 		}
