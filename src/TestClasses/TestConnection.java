@@ -9,31 +9,34 @@ import weather.WeatherPoint;
 
 /**
  * Simple test program for the VoltDB database
+ * 
  * @author william
- *
  */
-public class TestConnection {
+public class TestConnection
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		/* Open VoltDB connection */
 		VoltDbConnection conn = new VoltDbConnection("weatherpoints");
 		System.out.println("Opened connection to VoltDB");
-		
+
 		/* Create a weather point */
 		WeatherPoint wp = new WeatherPoint();
 		wp.cloudAmount = 50;
 		wp.maxTemp = 1;
 		wp.mintemp = 36;
 		System.out.println("Built weatherpoint");
-		
+
 		/* Insert weather point into database */
 		//conn.addRecord(wp);
 		//System.out.println("Wrote weatherpoint to VoltDB");
-		
+
 		/* Get contents of database */
 		System.out.println("All database entries: ");
-		LinkedList<WeatherPoint> rs = conn.getAllWeatherPoints();
-		for(WeatherPoint pt : rs) {
+		LinkedList <WeatherPoint> rs = conn.getAllWeatherPoints();
+		for (WeatherPoint pt: rs)
+		{
 			// TODO: Add toString method for WeatherPoint
 			System.out.print("maxTemp = " + pt.maxTemp);
 			System.out.print(" mintemp = " + pt.mintemp);
@@ -56,12 +59,13 @@ public class TestConnection {
 			System.out.print(" cumulative34WindSpeed = " + pt.cumulative34WindSpeed);
 			System.out.print(" gustWindSpeed = " + pt.gustWindSpeed);
 			System.out.print(" windDirection = " + pt.windDirection);
-			System.out.print(" cloudAmount = " + pt.cloudAmount + "\n"); 
+			System.out.print(" cloudAmount = " + pt.cloudAmount + "\n");
 		}
-		
+
 		System.out.println("\nSpecific entries: ");
 		rs = conn.getWeatherPointsWhere("maxTemp=9001");
-		for(WeatherPoint pt : rs) {
+		for (WeatherPoint pt: rs)
+		{
 			// TODO: Add toString method for WeatherPoint
 			System.out.print("maxTemp = " + pt.maxTemp);
 			System.out.print(" mintemp = " + pt.mintemp);
@@ -84,7 +88,7 @@ public class TestConnection {
 			System.out.print(" cumulative34WindSpeed = " + pt.cumulative34WindSpeed);
 			System.out.print(" gustWindSpeed = " + pt.gustWindSpeed);
 			System.out.print(" windDirection = " + pt.windDirection);
-			System.out.print(" cloudAmount = " + pt.cloudAmount + "\n"); 
+			System.out.print(" cloudAmount = " + pt.cloudAmount + "\n");
 		}
 	}
 

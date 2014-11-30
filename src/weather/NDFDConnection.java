@@ -1,7 +1,8 @@
-
 package weather;
 
 import java.util.LinkedList;
+
+import javax.xml.soap.*;
 
 public class NDFDConnection
 {
@@ -10,9 +11,9 @@ public class NDFDConnection
 
 	}
 
-	public LinkedList<WeatherPoint> pullData()
+	public LinkedList <WeatherPoint> pullData()
 	{
-		LinkedList<WeatherPoint> newPoints = new LinkedList<WeatherPoint>();
+		LinkedList <WeatherPoint> newPoints = new LinkedList <WeatherPoint>();
 
 		return newPoints;
 	}
