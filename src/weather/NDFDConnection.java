@@ -130,6 +130,45 @@ public class NDFDConnection
 
 					System.out.println("Examining node " + attribute.getNodeName());
 
+					if (attribute.getNodeName().compareTo("temperature") == 0)
+					{
+						System.out.println("Found a temperature.");
+						// Temperature can be max, min, or dew point.
+
+					}
+					else if (attribute.getNodeName().compareTo("precipitation") == 0)
+					{
+						System.out.println("Found a precipitation.");
+					}
+					else if (attribute.getNodeName().compareTo("wind-speed") == 0)
+					{
+						System.out.println("Found a wind speed.");
+					}
+					else if (attribute.getNodeName().compareTo("direction") == 0)
+					{
+						System.out.println("Found a direction.");
+					}
+					else if (attribute.getNodeName().compareTo("cloud-amount") == 0)
+					{
+						System.out.println("Found a cloud amount.");
+					}
+					else if (attribute.getNodeName().compareTo("probability-of-precipitation") == 0)
+					{
+						System.out.println("Found a probability of precipitation.");
+					}
+					else if (attribute.getNodeName().compareTo("convective-hazard") == 0)
+					{
+						System.out.println("Found a convective hazard.");
+					}
+					else if (attribute.getNodeName().compareTo("humidity") == 0)
+					{
+						System.out.println("Found a humidity.");
+					}
+					else
+					{
+						System.out.println("Ignoring: " + attribute.getNodeName());
+					}
+
 				}
 			}
 
