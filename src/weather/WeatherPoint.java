@@ -1,8 +1,10 @@
-
 package weather;
 
 public class WeatherPoint
 {
+	// TODO: Check which of these can be pulled via forecast data.
+
+	/* These are the old ones we found.  
 	// Temperature
 	public int maxTemp;
 	public int mintemp;
@@ -38,5 +40,32 @@ public class WeatherPoint
 
 	// Cloud Amounts
 	public int cloudAmount;
-
+	*/
+	
+	
+	// New values we can pull from the NDFD
+	
+	// TODO: We probably need to keep time that this forecast was valid.
+	
+	public int maxTemp;
+	public int minTemp;
+	public int dewPoint;
+	public int precipitationProbability12hour;
+	public float liquidPrecipitationAmount;
+	public float snowfallAmount;
+	public int cloudCoverAmount;
+	public int relativeHumidity;
+	public int windSpeed;
+	public int windDirection;
+	public int windGustSpeed;
+	public int probabilityTornado;
+	public int probabilityHail;
+	public int probabilityDamagingThunderstormWinds;
+	public int probabilityExtremeTornadoes;
+	public int probabilityExtremeHail;
+	public int probabilityExtremeThunderstormWinds;
+	public int probabilitySevereThunderstorm;
+	public int probabilityExtremeSevereThunderstorm;
+	public int maxRelativeHumidity;
+	public int minRelativeHumidity;
 }
