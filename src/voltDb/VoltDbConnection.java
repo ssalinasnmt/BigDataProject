@@ -120,7 +120,7 @@ public class VoltDbConnection {
 			e.printStackTrace();
 		}
 		
-		/* Convert the ResultSet into an array of WeatherPoints */
+		/* Convert the ResultSet into an linked list of WeatherPoints */
 		try {
 			while(res.next()) {
 				wps.add(resultToWeatherPoint(res));
