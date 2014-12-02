@@ -45,7 +45,51 @@ public class VoltDbConnection
 	 */
 	public void addRecord(WeatherPoint pt)
 	{
-		String sql = "INSERT INTO " + tableName + "(maxTemp, mintemp, dewPointTemp, heatIndexTemp, windChillTemp, rainAmount, snowAmount, probabilityOfPrecipitation, outlookPercent, tornadoPercent, hailPercent, damagingThunderstormWindPercent, extremeTornadoesPercent, extremeHailPercent, extremeThunderstormWindsPercent, severeThunderstormPercent, extremeSevereThunderstormPercent, sustainedWindSpeed, cumulative34WindSpeed, gustWindSpeed, windDirection, cloudAmount)" + " VALUES (" + +pt.maxTemp + ", " + +pt.mintemp + ", " + +pt.dewPointTemp + ", " + +pt.heatIndexTemp + ", " + +pt.windChillTemp + ", " + +pt.rainAmount + ", " + +pt.snowAmount + ", " + +pt.probabilityOfPrecipitation + ", " + +pt.outlookPercent + ", " + +pt.tornadoPercent + ", " + +pt.hailPercent + ", " + +pt.damagingThunderstormWindPercent + ", " + +pt.extremeTornadoesPercent + ", " + +pt.extremeHailPercent + ", " + +pt.extremeThunderstormWindsPercent + ", " + +pt.severeThunderstormPercent + ", " + +pt.extremeSevereThunderstormPercent + ", " + +pt.sustainedWindSpeed + ", " + +pt.cumulative34WindSpeed + ", " + +pt.gustWindSpeed + ", " + +pt.windDirection + ", " + +pt.cloudAmount + ")";
+		//Pre-redesign INSERT statement
+//		String sql = "INSERT INTO " + tableName + "(maxTemp, mintemp, dewPointTemp, heatIndexTemp, windChillTemp, rainAmount, snowAmount, probabilityOfPrecipitation, outlookPercent, tornadoPercent, hailPercent, damagingThunderstormWindPercent, extremeTornadoesPercent, extremeHailPercent, extremeThunderstormWindsPercent, severeThunderstormPercent, extremeSevereThunderstormPercent, sustainedWindSpeed, cumulative34WindSpeed, gustWindSpeed, windDirection, cloudAmount)" + " VALUES (" + +pt.maxTemp + ", " + +pt.mintemp + ", " + +pt.dewPointTemp + ", " + +pt.heatIndexTemp + ", " + +pt.windChillTemp + ", " + +pt.rainAmount + ", " + +pt.snowAmount + ", " + +pt.probabilityOfPrecipitation + ", " + +pt.outlookPercent + ", " + +pt.tornadoPercent + ", " + +pt.hailPercent + ", " + +pt.damagingThunderstormWindPercent + ", " + +pt.extremeTornadoesPercent + ", " + +pt.extremeHailPercent + ", " + +pt.extremeThunderstormWindsPercent + ", " + +pt.severeThunderstormPercent + ", " + +pt.extremeSevereThunderstormPercent + ", " + +pt.sustainedWindSpeed + ", " + +pt.cumulative34WindSpeed + ", " + +pt.gustWindSpeed + ", " + +pt.windDirection + ", " + +pt.cloudAmount + ")";
+		String sql = "INSERT INTO " + tableName + "(" + 
+				"maxTemp" + 
+				"minTemp" + 
+				"dewPoint" + 
+				"precipitationProbability12hour" + 
+				"liquidPrecipitationAmount" + 
+				"snowfallAmount" + 
+				"cloudCoverAmount" + 
+				"relativeHumidity" + 
+				"windSpeed" + 
+				"windDirection" + 
+				"windGustSpeed" + 
+				"probabilityTornado" + 
+				"probabilityHail" + 
+				"probabilityDamagingThunderstormWinds" + 
+				"probabilityExtremeTornadoes" + 
+				"probabilityExtremeHail" + 
+				"probabilityExtremeThunderstormWinds" + 
+				"probabilitySevereThunderstorm" + 
+				"probabilityExtremeSevereThunderstorm" + 
+				"maxRelativeHumidity" + 
+				"minRelativeHumidity) VALUES (" +
+				pt.maxTemp + "," + 
+				pt.minTemp + "," + 
+				pt.dewPoint + "," + 
+				pt.precipitationProbability12hour + "," + 
+				pt.liquidPrecipitationAmount + "," + 
+				pt.snowfallAmount + "," + 
+				pt.cloudCoverAmount + "," + 
+				pt.relativeHumidity + "," + 
+				pt.windSpeed + "," + 
+				pt.windDirection + "," + 
+				pt.windGustSpeed + "," + 
+				pt.probabilityTornado + "," + 
+				pt.probabilityHail + "," + 
+				pt.probabilityDamagingThunderstormWinds + "," + 
+				pt.probabilityExtremeTornadoes + "," + 
+				pt.probabilityExtremeHail + "," + 
+				pt.probabilityExtremeThunderstormWinds + "," + 
+				pt.probabilitySevereThunderstorm + "," + 
+				pt.probabilityExtremeSevereThunderstorm + "," + 
+				pt.maxRelativeHumidity + "," + 
+				pt.minRelativeHumidity + ")";
 		System.out.println("Attempting to run following SQL query: " + sql);
 
 		try
@@ -68,7 +112,7 @@ public class VoltDbConnection
 	public LinkedList <WeatherPoint> getAllWeatherPoints()
 	{
 		ResultSet res = null;
-		LinkedList <WeatherPoint> wps = new LinkedList();
+		LinkedList <WeatherPoint> wps = new LinkedList<>();
 		String sql = "SELECT * FROM weatherpoints";
 
 		/* Get result set */
@@ -109,7 +153,7 @@ public class VoltDbConnection
 	public LinkedList <WeatherPoint> getWeatherPointsWhere(String where)
 	{
 		ResultSet res = null;
-		LinkedList <WeatherPoint> wps = new LinkedList();
+		LinkedList <WeatherPoint> wps = new LinkedList<>();
 		String sql = "SELECT * FROM weatherpoints WHERE " + where;
 
 		/* Get result set */
@@ -154,27 +198,26 @@ public class VoltDbConnection
 		try
 		{
 			wp.maxTemp = res.getInt("maxTemp");
-			wp.mintemp = res.getInt("mintemp");
-			wp.dewPointTemp = res.getInt("dewPointTemp");
-			wp.heatIndexTemp = res.getInt("heatIndexTemp");
-			wp.windChillTemp = res.getInt("windChillTemp");
-			wp.rainAmount = res.getInt("rainAmount");
-			wp.snowAmount = res.getInt("snowAmount");
-			wp.probabilityOfPrecipitation = res.getInt("probabilityOfPrecipitation");
-			wp.outlookPercent = res.getInt("outlookPercent");
-			wp.tornadoPercent = res.getInt("tornadoPercent");
-			wp.hailPercent = res.getInt("hailPercent");
-			wp.damagingThunderstormWindPercent = res.getInt("damagingThunderstormWindPercent");
-			wp.extremeTornadoesPercent = res.getInt("extremeTornadoesPercent");
-			wp.extremeHailPercent = res.getInt("extremeHailPercent");
-			wp.extremeThunderstormWindsPercent = res.getInt("extremeThunderstormWindsPercent");
-			wp.severeThunderstormPercent = res.getInt("severeThunderstormPercent");
-			wp.extremeSevereThunderstormPercent = res.getInt("extremeSevereThunderstormPercent");
-			wp.sustainedWindSpeed = res.getInt("sustainedWindSpeed");
-			wp.cumulative34WindSpeed = res.getInt("cumulative34WindSpeed");
-			wp.gustWindSpeed = res.getInt("gustWindSpeed");
+			wp.minTemp = res.getInt("minTemp");
+			wp.dewPoint = res.getInt("dewPoint");
+			wp.precipitationProbability12hour = res.getInt("precipitationProbability12hour");
+			wp.liquidPrecipitationAmount = res.getInt("liquidPrecipitationAmount");
+			wp.snowfallAmount = res.getInt("snowfallAmount");
+			wp.cloudCoverAmount = res.getInt("cloudCoverAmount");
+			wp.relativeHumidity = res.getInt("relativeHumidity");
+			wp.windSpeed = res.getInt("windSpeed");
 			wp.windDirection = res.getInt("windDirection");
-			wp.cloudAmount = res.getInt("cloudAmount");
+			wp.windGustSpeed = res.getInt("windGustSpeed");
+			wp.probabilityTornado = res.getInt("probabilityTornado");
+			wp.probabilityHail = res.getInt("probabilityHail");
+			wp.probabilityDamagingThunderstormWinds = res.getInt("probabilityDamagingThunderstormWinds");
+			wp.probabilityExtremeTornadoes = res.getInt("probabilityExtremeTornadoes");
+			wp.probabilityExtremeHail = res.getInt("probabilityExtremeHail");
+			wp.probabilityExtremeThunderstormWinds = res.getInt("probabilityExtremeThunderstormWinds");
+			wp.probabilitySevereThunderstorm = res.getInt("probabilitySevereThunderstorm");
+			wp.probabilityExtremeSevereThunderstorm = res.getInt("probabilityExtremeSevereThunderstorm");
+			wp.maxRelativeHumidity = res.getInt("maxRelativeHumidity");
+			wp.minRelativeHumidity = res.getInt("minRelativeHumidity");
 		}
 		catch (SQLException e)
 		{
