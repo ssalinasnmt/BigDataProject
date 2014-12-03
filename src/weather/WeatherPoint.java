@@ -53,8 +53,8 @@ public class WeatherPoint
 	public int minTemp;
 	public int dewPoint;
 	public int precipitationProbability12hour;
-	public double liquidPrecipitationAmount;
-	public double snowfallAmount;
+	public int liquidPrecipitationAmount;
+	public int snowfallAmount;
 	public int cloudCoverAmount;
 	public int relativeHumidity;
 	public int windSpeed;

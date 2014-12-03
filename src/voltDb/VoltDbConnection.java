@@ -201,8 +201,8 @@ public class VoltDbConnection
 			wp.minTemp = res.getInt("minTemp");
 			wp.dewPoint = res.getInt("dewPoint");
 			wp.precipitationProbability12hour = res.getInt("precipitationProbability12hour");
-			wp.liquidPrecipitationAmount = res.getDouble("liquidPrecipitationAmount");
-			wp.snowfallAmount = res.getDouble("snowfallAmount");
+			wp.liquidPrecipitationAmount = res.getInt("liquidPrecipitationAmount");
+			wp.snowfallAmount = res.getInt("snowfallAmount");
 			wp.cloudCoverAmount = res.getInt("cloudCoverAmount");
 			wp.relativeHumidity = res.getInt("relativeHumidity");
 			wp.windSpeed = res.getInt("windSpeed");
