@@ -1,5 +1,7 @@
 package weather;
 
+import org.voltdb.VoltType;
+
 public class WeatherPoint
 {
 	// TODO: Check which of these can be pulled via forecast data.
@@ -51,8 +53,8 @@ public class WeatherPoint
 	public int minTemp;
 	public int dewPoint;
 	public int precipitationProbability12hour;
-	public float liquidPrecipitationAmount;
-	public float snowfallAmount;
+	public double liquidPrecipitationAmount;
+	public double snowfallAmount;
 	public int cloudCoverAmount;
 	public int relativeHumidity;
 	public int windSpeed;

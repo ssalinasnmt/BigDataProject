@@ -48,48 +48,48 @@ public class VoltDbConnection
 		//Pre-redesign INSERT statement
 //		String sql = "INSERT INTO " + tableName + "(maxTemp, mintemp, dewPointTemp, heatIndexTemp, windChillTemp, rainAmount, snowAmount, probabilityOfPrecipitation, outlookPercent, tornadoPercent, hailPercent, damagingThunderstormWindPercent, extremeTornadoesPercent, extremeHailPercent, extremeThunderstormWindsPercent, severeThunderstormPercent, extremeSevereThunderstormPercent, sustainedWindSpeed, cumulative34WindSpeed, gustWindSpeed, windDirection, cloudAmount)" + " VALUES (" + +pt.maxTemp + ", " + +pt.mintemp + ", " + +pt.dewPointTemp + ", " + +pt.heatIndexTemp + ", " + +pt.windChillTemp + ", " + +pt.rainAmount + ", " + +pt.snowAmount + ", " + +pt.probabilityOfPrecipitation + ", " + +pt.outlookPercent + ", " + +pt.tornadoPercent + ", " + +pt.hailPercent + ", " + +pt.damagingThunderstormWindPercent + ", " + +pt.extremeTornadoesPercent + ", " + +pt.extremeHailPercent + ", " + +pt.extremeThunderstormWindsPercent + ", " + +pt.severeThunderstormPercent + ", " + +pt.extremeSevereThunderstormPercent + ", " + +pt.sustainedWindSpeed + ", " + +pt.cumulative34WindSpeed + ", " + +pt.gustWindSpeed + ", " + +pt.windDirection + ", " + +pt.cloudAmount + ")";
 		String sql = "INSERT INTO " + tableName + "(" + 
-				"maxTemp" + 
-				"minTemp" + 
-				"dewPoint" + 
-				"precipitationProbability12hour" + 
-				"liquidPrecipitationAmount" + 
-				"snowfallAmount" + 
-				"cloudCoverAmount" + 
-				"relativeHumidity" + 
-				"windSpeed" + 
-				"windDirection" + 
-				"windGustSpeed" + 
-				"probabilityTornado" + 
-				"probabilityHail" + 
-				"probabilityDamagingThunderstormWinds" + 
-				"probabilityExtremeTornadoes" + 
-				"probabilityExtremeHail" + 
-				"probabilityExtremeThunderstormWinds" + 
-				"probabilitySevereThunderstorm" + 
-				"probabilityExtremeSevereThunderstorm" + 
-				"maxRelativeHumidity" + 
-				"minRelativeHumidity) VALUES (" +
-				pt.maxTemp + "," + 
-				pt.minTemp + "," + 
-				pt.dewPoint + "," + 
-				pt.precipitationProbability12hour + "," + 
-				pt.liquidPrecipitationAmount + "," + 
-				pt.snowfallAmount + "," + 
-				pt.cloudCoverAmount + "," + 
-				pt.relativeHumidity + "," + 
-				pt.windSpeed + "," + 
-				pt.windDirection + "," + 
-				pt.windGustSpeed + "," + 
-				pt.probabilityTornado + "," + 
-				pt.probabilityHail + "," + 
-				pt.probabilityDamagingThunderstormWinds + "," + 
-				pt.probabilityExtremeTornadoes + "," + 
-				pt.probabilityExtremeHail + "," + 
-				pt.probabilityExtremeThunderstormWinds + "," + 
-				pt.probabilitySevereThunderstorm + "," + 
-				pt.probabilityExtremeSevereThunderstorm + "," + 
-				pt.maxRelativeHumidity + "," + 
-				pt.minRelativeHumidity + ")";
+						"maxTemp, " + 
+						"minTemp, " + 
+						"dewPoint, " + 
+						"precipitationProbability12hour, " + 
+						"liquidPrecipitationAmount, " + 
+						"snowfallAmount, " + 
+						"cloudCoverAmount, " + 
+						"relativeHumidity, " + 
+						"windSpeed, " + 
+						"windDirection, " + 
+						"windGustSpeed, " + 
+						"probabilityTornado, " + 
+						"probabilityHail, " + 
+						"probabilityDamagingThunderstormWinds, " + 
+						"probabilityExtremeTornadoes, " + 
+						"probabilityExtremeHail, " + 
+						"probabilityExtremeThunderstormWinds, " + 
+						"probabilitySevereThunderstorm, " + 
+						"probabilityExtremeSevereThunderstorm, " + 
+						"maxRelativeHumidity, " + 
+						"minRelativeHumidity) VALUES (" +
+						pt.maxTemp + "," + 
+						pt.minTemp + "," + 
+						pt.dewPoint + "," + 
+						pt.precipitationProbability12hour + "," + 
+						pt.liquidPrecipitationAmount + "," + 
+						pt.snowfallAmount + "," + 
+						pt.cloudCoverAmount + "," + 
+						pt.relativeHumidity + "," + 
+						pt.windSpeed + "," + 
+						pt.windDirection + "," + 
+						pt.windGustSpeed + "," + 
+						pt.probabilityTornado + "," + 
+						pt.probabilityHail + "," + 
+						pt.probabilityDamagingThunderstormWinds + "," + 
+						pt.probabilityExtremeTornadoes + "," + 
+						pt.probabilityExtremeHail + "," + 
+						pt.probabilityExtremeThunderstormWinds + "," + 
+						pt.probabilitySevereThunderstorm + "," + 
+						pt.probabilityExtremeSevereThunderstorm + "," + 
+						pt.maxRelativeHumidity + "," + 
+						pt.minRelativeHumidity + ")";
 		System.out.println("Attempting to run following SQL query: " + sql);
 
 		try
@@ -201,8 +201,8 @@ public class VoltDbConnection
 			wp.minTemp = res.getInt("minTemp");
 			wp.dewPoint = res.getInt("dewPoint");
 			wp.precipitationProbability12hour = res.getInt("precipitationProbability12hour");
-			wp.liquidPrecipitationAmount = res.getInt("liquidPrecipitationAmount");
-			wp.snowfallAmount = res.getInt("snowfallAmount");
+			wp.liquidPrecipitationAmount = res.getDouble("liquidPrecipitationAmount");
+			wp.snowfallAmount = res.getDouble("snowfallAmount");
 			wp.cloudCoverAmount = res.getInt("cloudCoverAmount");
 			wp.relativeHumidity = res.getInt("relativeHumidity");
 			wp.windSpeed = res.getInt("windSpeed");

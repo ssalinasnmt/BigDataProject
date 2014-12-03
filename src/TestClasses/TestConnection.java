@@ -1,7 +1,5 @@
 package TestClasses;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.LinkedList;
 
 import voltDb.VoltDbConnection;
@@ -23,14 +21,14 @@ public class TestConnection
 
 		/* Create a weather point */
 		WeatherPoint wp = new WeatherPoint();
-		wp.cloudAmount = 50;
-		wp.maxTemp = 1;
-		wp.mintemp = 36;
+		wp.dewPoint = 50;
+		wp.maxTemp = 9001;
+		wp.minTemp = 36;
 		System.out.println("Built weatherpoint");
 
 		/* Insert weather point into database */
-		//conn.addRecord(wp);
-		//System.out.println("Wrote weatherpoint to VoltDB");
+		conn.addRecord(wp);
+		System.out.println("Wrote weatherpoint to VoltDB");
 
 		/* Get contents of database */
 		System.out.println("All database entries: ");
@@ -39,27 +37,26 @@ public class TestConnection
 		{
 			// TODO: Add toString method for WeatherPoint
 			System.out.print("maxTemp = " + pt.maxTemp);
-			System.out.print(" mintemp = " + pt.mintemp);
-			System.out.print(" dewPointTemp = " + pt.dewPointTemp);
-			System.out.print(" heatIndexTemp = " + pt.heatIndexTemp);
-			System.out.print(" windChillTemp = " + pt.windChillTemp);
-			System.out.print(" rainAmount = " + pt.rainAmount);
-			System.out.print(" snowAmount = " + pt.snowAmount);
-			System.out.print(" probabilityOfPrecipitation = " + pt.probabilityOfPrecipitation);
-			System.out.print(" outlookPercent = " + pt.outlookPercent);
-			System.out.print(" tornadoPercent = " + pt.tornadoPercent);
-			System.out.print(" hailPercent = " + pt.hailPercent);
-			System.out.print(" damagingThunderstormWindPercent = " + pt.damagingThunderstormWindPercent);
-			System.out.print(" extremeTornadoesPercent = " + pt.extremeTornadoesPercent);
-			System.out.print(" extremeHailPercent = " + pt.extremeHailPercent);
-			System.out.print(" extremeThunderstormWindsPercent = " + pt.extremeThunderstormWindsPercent);
-			System.out.print(" severeThunderstormPercent = " + pt.severeThunderstormPercent);
-			System.out.print(" extremeSevereThunderstormPercent = " + pt.extremeSevereThunderstormPercent);
-			System.out.print(" sustainedWindSpeed = " + pt.sustainedWindSpeed);
-			System.out.print(" cumulative34WindSpeed = " + pt.cumulative34WindSpeed);
-			System.out.print(" gustWindSpeed = " + pt.gustWindSpeed);
+			System.out.print(" minTemp = " + pt.minTemp);
+			System.out.print(" dewPoint = " + pt.dewPoint);
+			System.out.print(" precipitationProbability12hour = " + pt.precipitationProbability12hour);
+			System.out.print(" liquidPrecipitationAmount = " + pt.liquidPrecipitationAmount);
+			System.out.print(" snowfallAmount = " + pt.snowfallAmount);
+			System.out.print(" cloudCoverAmount = " + pt.cloudCoverAmount);
+			System.out.print(" relativeHumidity = " + pt.relativeHumidity);
+			System.out.print(" windSpeed = " + pt.windSpeed);
 			System.out.print(" windDirection = " + pt.windDirection);
-			System.out.print(" cloudAmount = " + pt.cloudAmount + "\n");
+			System.out.print(" windGustSpeed = " + pt.windGustSpeed);
+			System.out.print(" probabilityTornado = " + pt.probabilityTornado);
+			System.out.print(" probabilityHail = " + pt.probabilityHail);
+			System.out.print(" probabilityDamagingThunderstormWinds = " + pt.probabilityDamagingThunderstormWinds);
+			System.out.print(" probabilityExtremeTornadoes = " + pt.probabilityExtremeTornadoes);
+			System.out.print(" probabilityExtremeHail = " + pt.probabilityExtremeHail);
+			System.out.print(" probabilityExtremeThunderstormWinds = " + pt.probabilityExtremeThunderstormWinds);
+			System.out.print(" probabilitySevereThunderstorm = " + pt.probabilitySevereThunderstorm);
+			System.out.print(" probabilityExtremeSevereThunderstorm = " + pt.probabilityExtremeSevereThunderstorm);
+			System.out.print(" maxRelativeHumidity = " + pt.maxRelativeHumidity);
+			System.out.print(" minRelativeHumidity = " + pt.minRelativeHumidity + "\n");
 		}
 
 		System.out.println("\nSpecific entries: ");
@@ -68,27 +65,26 @@ public class TestConnection
 		{
 			// TODO: Add toString method for WeatherPoint
 			System.out.print("maxTemp = " + pt.maxTemp);
-			System.out.print(" mintemp = " + pt.mintemp);
-			System.out.print(" dewPointTemp = " + pt.dewPointTemp);
-			System.out.print(" heatIndexTemp = " + pt.heatIndexTemp);
-			System.out.print(" windChillTemp = " + pt.windChillTemp);
-			System.out.print(" rainAmount = " + pt.rainAmount);
-			System.out.print(" snowAmount = " + pt.snowAmount);
-			System.out.print(" probabilityOfPrecipitation = " + pt.probabilityOfPrecipitation);
-			System.out.print(" outlookPercent = " + pt.outlookPercent);
-			System.out.print(" tornadoPercent = " + pt.tornadoPercent);
-			System.out.print(" hailPercent = " + pt.hailPercent);
-			System.out.print(" damagingThunderstormWindPercent = " + pt.damagingThunderstormWindPercent);
-			System.out.print(" extremeTornadoesPercent = " + pt.extremeTornadoesPercent);
-			System.out.print(" extremeHailPercent = " + pt.extremeHailPercent);
-			System.out.print(" extremeThunderstormWindsPercent = " + pt.extremeThunderstormWindsPercent);
-			System.out.print(" severeThunderstormPercent = " + pt.severeThunderstormPercent);
-			System.out.print(" extremeSevereThunderstormPercent = " + pt.extremeSevereThunderstormPercent);
-			System.out.print(" sustainedWindSpeed = " + pt.sustainedWindSpeed);
-			System.out.print(" cumulative34WindSpeed = " + pt.cumulative34WindSpeed);
-			System.out.print(" gustWindSpeed = " + pt.gustWindSpeed);
+			System.out.print(" minTemp = " + pt.minTemp);
+			System.out.print(" dewPoint = " + pt.dewPoint);
+			System.out.print(" precipitationProbability12hour = " + pt.precipitationProbability12hour);
+			System.out.print(" liquidPrecipitationAmount = " + pt.liquidPrecipitationAmount);
+			System.out.print(" snowfallAmount = " + pt.snowfallAmount);
+			System.out.print(" cloudCoverAmount = " + pt.cloudCoverAmount);
+			System.out.print(" relativeHumidity = " + pt.relativeHumidity);
+			System.out.print(" windSpeed = " + pt.windSpeed);
 			System.out.print(" windDirection = " + pt.windDirection);
-			System.out.print(" cloudAmount = " + pt.cloudAmount + "\n");
+			System.out.print(" windGustSpeed = " + pt.windGustSpeed);
+			System.out.print(" probabilityTornado = " + pt.probabilityTornado);
+			System.out.print(" probabilityHail = " + pt.probabilityHail);
+			System.out.print(" probabilityDamagingThunderstormWinds = " + pt.probabilityDamagingThunderstormWinds);
+			System.out.print(" probabilityExtremeTornadoes = " + pt.probabilityExtremeTornadoes);
+			System.out.print(" probabilityExtremeHail = " + pt.probabilityExtremeHail);
+			System.out.print(" probabilityExtremeThunderstormWinds = " + pt.probabilityExtremeThunderstormWinds);
+			System.out.print(" probabilitySevereThunderstorm = " + pt.probabilitySevereThunderstorm);
+			System.out.print(" probabilityExtremeSevereThunderstorm = " + pt.probabilityExtremeSevereThunderstorm);
+			System.out.print(" maxRelativeHumidity = " + pt.maxRelativeHumidity);
+			System.out.print(" minRelativeHumidity = " + pt.minRelativeHumidity + "\n");
 		}
 	}
 
