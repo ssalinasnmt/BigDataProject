@@ -259,7 +259,7 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("total") == 0)
 								{
 									System.out.println("Found total cloud amount.");
-									wp.cloudCoverAmount = this.getValue(attribute); 
+									wp.cloudCoverAmount = this.getValue(attribute);
 								}
 								else
 								{
@@ -428,6 +428,7 @@ public class NDFDConnection
 		// System.out.println("getValue: Returning "+ret);
 		return ret;
 	}
+
 	private int getFloatValue(Node n)
 	{
 		int ret = -1;
