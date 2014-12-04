@@ -155,10 +155,12 @@ public class NDFDConnection
 								else if (n.getNodeValue().compareTo("minimum") == 0)
 								{
 									System.out.println("Found minimum");
+									wp.minTemp = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("dew point") == 0)
 								{
 									System.out.println("Found dew point.");
+									wp.dewPoint = this.getValue(attribute);
 								}
 								else
 								{
@@ -180,10 +182,12 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("liquid") == 0)
 								{
 									System.out.println("Found liquid.");
+									wp.liquidPrecipitationAmount = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("snow") == 0)
 								{
 									System.out.println("Found snow");
+									wp.snowfallAmount = this.getValue(attribute);
 								}
 								else
 								{
@@ -206,10 +210,12 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("sustained") == 0)
 								{
 									System.out.println("Found sustained.");
+									wp.windSpeed = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("gust") == 0)
 								{
 									System.out.println("Found gust");
+									wp.windGustSpeed = this.getValue(attribute);
 								}
 								else
 								{
@@ -231,6 +237,7 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("wind") == 0)
 								{
 									System.out.println("Found wind direction.");
+									wp.windDirection = this.getValue(attribute);
 								}
 								else
 								{
@@ -252,6 +259,7 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("total") == 0)
 								{
 									System.out.println("Found total cloud amount.");
+									wp.cloudCoverAmount = this.getValue(attribute); 
 								}
 								else
 								{
@@ -273,6 +281,7 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("12 hour") == 0)
 								{
 									System.out.println("Found 12 hour probability of precipiation.");
+									wp.precipitationProbability12hour = this.getValue(attribute);
 								}
 								else
 								{
@@ -294,34 +303,42 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("tornadoes") == 0)
 								{
 									System.out.println("Found tornadoes.");
+									wp.probabilityTornado = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("hail") == 0)
 								{
 									System.out.println("Found hail");
+									wp.probabilityHail = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("damaging thunderstorm winds") == 0)
 								{
 									System.out.println("Found damaging thunderstorm winds");
+									wp.probabilityDamagingThunderstormWinds = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("extreme tornadoes") == 0)
 								{
 									System.out.println("Found extreme tornadoes");
+									wp.probabilityExtremeTornadoes = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("extreme hail") == 0)
 								{
 									System.out.println("Found extreme hail");
+									wp.probabilityExtremeHail = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("extreme thunderstorm winds") == 0)
 								{
 									System.out.println("Found extreme thunderstorm winds");
+									wp.probabilityExtremeThunderstormWinds = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("severe thunderstorms") == 0)
 								{
 									System.out.println("Found severe thunderstorms");
+									wp.probabilitySevereThunderstorm = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("extreme severe thunderstorms") == 0)
 								{
 									System.out.println("Found extreme severe thunderstorms");
+									wp.probabilityExtremeSevereThunderstorm = this.getValue(attribute);
 								}
 								else
 								{
@@ -343,14 +360,17 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("relative") == 0)
 								{
 									System.out.println("Found relative.");
+									wp.relativeHumidity = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("minimum relative") == 0)
 								{
 									System.out.println("Found minimum");
+									wp.minRelativeHumidity = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("maximum relative") == 0)
 								{
 									System.out.println("Found maximum.");
+									wp.maxRelativeHumidity = this.getValue(attribute);
 								}
 								else
 								{
