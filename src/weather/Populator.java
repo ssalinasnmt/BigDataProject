@@ -19,6 +19,7 @@ public class Populator
 		// TODO: Sean
 		LinkedList <WeatherPoint> newData = ndfd.pullData();
 
+		// For debug
 		System.out.println("Printing all weather points.");
 		for (WeatherPoint w : newData)
 		{
