@@ -20,6 +20,10 @@ public class Populator
 		LinkedList <WeatherPoint> newData = ndfd.pullData();
 
 		System.out.println("Printing all weather points.");
+		for (WeatherPoint w : newData)
+		{
+			w.printWeatherPoint();
+		}
 
 		// Add new data received from NDFD to voltDB
 		// TODO: Will
