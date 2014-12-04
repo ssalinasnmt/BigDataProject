@@ -4,51 +4,8 @@ import org.voltdb.VoltType;
 
 public class WeatherPoint
 {
-	// TODO: Check which of these can be pulled via forecast data.
-
-	/* These are the old ones we found.  
-	// Temperature
-	public int maxTemp;
-	public int mintemp;
-	public int dewPointTemp;
-	public int heatIndexTemp;
-	public int windChillTemp;
-
-	// Precipitation
-	public int rainAmount;
-	public int snowAmount;
-
-	// Probability of Precipitation
-	public int probabilityOfPrecipitation;
-
-	// Convective Hazard
-	public int outlookPercent;
-	public int tornadoPercent;
-	public int hailPercent;
-	public int damagingThunderstormWindPercent;
-	public int extremeTornadoesPercent;
-	public int extremeHailPercent;
-	public int extremeThunderstormWindsPercent;
-	public int severeThunderstormPercent;
-	public int extremeSevereThunderstormPercent;
-
-	// Wind Speed
-	public int sustainedWindSpeed;
-	public int cumulative34WindSpeed;
-	public int gustWindSpeed;
-
-	// Wind Direction
-	public int windDirection;
-
-	// Cloud Amounts
-	public int cloudAmount;
-	*/
-	
-	
-	// New values we can pull from the NDFD
-	
 	// TODO: We probably need to keep time that this forecast was valid.
-	
+
 	public int maxTemp;
 	public int minTemp;
 	public int dewPoint;
@@ -70,4 +27,34 @@ public class WeatherPoint
 	public int probabilityExtremeSevereThunderstorm;
 	public int maxRelativeHumidity;
 	public int minRelativeHumidity;
+
+	public void printWeatherPoint()
+	{
+		// This prints out all data stored in a weather point.
+
+		System.out.println("Printing weather point.");
+		System.out.println("\tMax Temperature: " + maxTemp);
+		System.out.println("\tMin Temperature: " + minTemp);
+		System.out.println("\tDew Point Temperature: " + dewPoint);
+		System.out.println("\tPrecipitation Probability for 12 hour: " + precipitationProbability12hour);
+		System.out.println("\tLiquid Precipitation Amount (in hundreths of an inch): " + liquidPrecipitationAmount);
+		System.out.println("\tSnowfall Amount (in hundreths of an inch): " + snowfallAmount);
+		System.out.println("\tCloud Cover Amount: " + cloudCoverAmount);
+		System.out.println("\tRelative Humidity: " + relativeHumidity);
+		System.out.println("\tWind Speed: " + windSpeed);
+		System.out.println("\tWind Direction: " + windDirection);
+		System.out.println("\tWind Gust Speed: " + windGustSpeed);
+		System.out.println("\tProbability of Tornadoes: " + probabilityTornado);
+		System.out.println("\tProbability of Hail: " + probabilityHail);
+		System.out.println("\tProbability of Damaging Thunderstorm Winds" + probabilityDamagingThunderstormWinds);
+		System.out.println("\tProbability of Extreme Tornadoes: " + probabilityExtremeTornadoes);
+		System.out.println("\tProbability of Extreme Hail" + probabilityExtremeHail);
+		System.out.println("\tProbability of Extreme Thunderstorm Winds: " + probabilityExtremeThunderstormWinds);
+		System.out.println("\tProbability of Severe Thunderstorm Winds: " + probabilitySevereThunderstorm);
+		System.out.println("\tProbability of Extreme Severe Thunderstorm Winds" + probabilityExtremeThunderstormWinds);
+		System.out.println("\tProbability of Extreme Hyper Severe Intense Crazy Over 9000 Damaging Severe Extreme Ultra Thunderstorm Winds: 0 (we hope)");
+		System.out.println("\tMaximum Relative Humidity: " + maxRelativeHumidity);
+		System.out.println("\tMinimum Relative Humidity: " + minRelativeHumidity);
+		System.out.println();
+	}
 }
