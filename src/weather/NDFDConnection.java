@@ -19,6 +19,8 @@ import org.xml.sax.SAXException;
 
 public class NDFDConnection
 {
+	private boolean DEBUG = false; // Set to true to see parser output.
+
 	public LinkedList <WeatherPoint> pullData()
 	{
 		LinkedList <WeatherPoint> newPoints = new LinkedList <WeatherPoint>();
@@ -101,7 +103,8 @@ public class NDFDConnection
 		}
 
 		// At this point, the request URL is ready.
-		System.out.println("Request URL: " + requestURLString);
+		if (DEBUG)
+			System.out.println("Request URL: " + requestURLString);
 
 		// Instantiate a URL with it.
 		URL requestURL = null;
@@ -138,33 +141,39 @@ public class NDFDConnection
 
 					if (attribute.getNodeName().compareTo("temperature") == 0)
 					{
-						System.out.println("Found a temperature.");
+						if (DEBUG)
+							System.out.println("Found a temperature.");
 						// Temperature can be max, min, or dew point.
 						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
 						{
 							Node n = attribute.getAttributes().item(nodeIndex);
 							if (n.getNodeName().compareTo("type") == 0)
 							{
-								System.out.println("Found type attribute. >" + n.getNodeValue() + "<");
+								if (DEBUG)
+									System.out.println("Found type attribute. >" + n.getNodeValue() + "<");
 								if (n.getNodeValue().compareTo("maximum") == 0)
 								{
-									System.out.println("Found maximum.");
+									if (DEBUG)
+										System.out.println("Found maximum.");
 									wp.maxTemp = this.getValue(attribute);
 									System.out.println("Maximum: " + wp.maxTemp);
 								}
 								else if (n.getNodeValue().compareTo("minimum") == 0)
 								{
-									System.out.println("Found minimum");
+									if (DEBUG)
+										System.out.println("Found minimum");
 									wp.minTemp = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("dew point") == 0)
 								{
-									System.out.println("Found dew point.");
+									if (DEBUG)
+										System.out.println("Found dew point.");
 									wp.dewPoint = this.getValue(attribute);
 								}
 								else
 								{
-									System.out.println("Found something else? Given " + n.getNodeValue());
+									if (DEBUG)
+										System.out.println("Found something else? Given " + n.getNodeValue());
 								}
 								break;
 							}
@@ -172,7 +181,8 @@ public class NDFDConnection
 					}
 					else if (attribute.getNodeName().compareTo("precipitation") == 0)
 					{
-						System.out.println("Found a precipitation.");
+						if (DEBUG)
+							System.out.println("Found a precipitation.");
 						// Precipitation can be liquid or snow
 						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
 						{
@@ -181,17 +191,20 @@ public class NDFDConnection
 							{
 								if (n.getNodeValue().compareTo("liquid") == 0)
 								{
-									System.out.println("Found liquid.");
+									if (DEBUG)
+										System.out.println("Found liquid.");
 									wp.liquidPrecipitationAmount = this.getFloatValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("snow") == 0)
 								{
-									System.out.println("Found snow");
+									if (DEBUG)
+										System.out.println("Found snow");
 									wp.snowfallAmount = this.getFloatValue(attribute);
 								}
 								else
 								{
-									System.out.println("Found something else? Given " + n.getNodeValue());
+									if (DEBUG)
+										System.out.println("Found something else? Given " + n.getNodeValue());
 								}
 								break;
 							}
@@ -199,7 +212,8 @@ public class NDFDConnection
 					}
 					else if (attribute.getNodeName().compareTo("wind-speed") == 0)
 					{
-						System.out.println("Found a wind speed.");
+						if (DEBUG)
+							System.out.println("Found a wind speed.");
 
 						// Wind Speed can be sustained or gust
 						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
@@ -209,17 +223,20 @@ public class NDFDConnection
 							{
 								if (n.getNodeValue().compareTo("sustained") == 0)
 								{
-									System.out.println("Found sustained.");
+									if (DEBUG)
+										System.out.println("Found sustained.");
 									wp.windSpeed = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("gust") == 0)
 								{
-									System.out.println("Found gust");
+									if (DEBUG)
+										System.out.println("Found gust");
 									wp.windGustSpeed = this.getValue(attribute);
 								}
 								else
 								{
-									System.out.println("Found something else? Given " + n.getNodeValue());
+									if (DEBUG)
+										System.out.println("Found something else? Given " + n.getNodeValue());
 								}
 								break;
 							}
@@ -227,7 +244,8 @@ public class NDFDConnection
 					}
 					else if (attribute.getNodeName().compareTo("direction") == 0)
 					{
-						System.out.println("Found a direction.");
+						if (DEBUG)
+							System.out.println("Found a direction.");
 						// Direction is only wind direction.
 						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
 						{
@@ -236,12 +254,14 @@ public class NDFDConnection
 							{
 								if (n.getNodeValue().compareTo("wind") == 0)
 								{
-									System.out.println("Found wind direction.");
+									if (DEBUG)
+										System.out.println("Found wind direction.");
 									wp.windDirection = this.getValue(attribute);
 								}
 								else
 								{
-									System.out.println("Found something else? Given " + n.getNodeValue());
+									if (DEBUG)
+										System.out.println("Found something else? Given " + n.getNodeValue());
 								}
 								break;
 							}
@@ -249,7 +269,8 @@ public class NDFDConnection
 					}
 					else if (attribute.getNodeName().compareTo("cloud-amount") == 0)
 					{
-						System.out.println("Found a cloud amount.");
+						if (DEBUG)
+							System.out.println("Found a cloud amount.");
 						// Cloud amount can be only total cloud cover
 						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
 						{
@@ -258,12 +279,14 @@ public class NDFDConnection
 							{
 								if (n.getNodeValue().compareTo("total") == 0)
 								{
-									System.out.println("Found total cloud amount.");
+									if (DEBUG)
+										System.out.println("Found total cloud amount.");
 									wp.cloudCoverAmount = this.getValue(attribute);
 								}
 								else
 								{
-									System.out.println("Found something else? Given " + n.getNodeValue());
+									if (DEBUG)
+										System.out.println("Found something else? Given " + n.getNodeValue());
 								}
 								break;
 							}
@@ -271,7 +294,8 @@ public class NDFDConnection
 					}
 					else if (attribute.getNodeName().compareTo("probability-of-precipitation") == 0)
 					{
-						System.out.println("Found a probability of precipitation.");
+						if (DEBUG)
+							System.out.println("Found a probability of precipitation.");
 						// Probability of Precipitation is only 12-hour
 						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
 						{
@@ -280,12 +304,14 @@ public class NDFDConnection
 							{
 								if (n.getNodeValue().compareTo("12 hour") == 0)
 								{
-									System.out.println("Found 12 hour probability of precipiation.");
+									if (DEBUG)
+										System.out.println("Found 12 hour probability of precipiation.");
 									wp.precipitationProbability12hour = this.getValue(attribute);
 								}
 								else
 								{
-									System.out.println("Found something else? Given " + n.getNodeValue());
+									if (DEBUG)
+										System.out.println("Found something else? Given " + n.getNodeValue());
 								}
 								break;
 							}
@@ -293,7 +319,8 @@ public class NDFDConnection
 					}
 					else if (attribute.getNodeName().compareTo("convective-hazard") == 0)
 					{
-						System.out.println("Found a convective hazard.");
+						if (DEBUG)
+							System.out.println("Found a convective hazard.");
 						// Convective Hazards can be many things.
 						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
 						{
@@ -302,47 +329,56 @@ public class NDFDConnection
 							{
 								if (n.getNodeValue().compareTo("tornadoes") == 0)
 								{
-									System.out.println("Found tornadoes.");
+									if (DEBUG)
+										System.out.println("Found tornadoes.");
 									wp.probabilityTornado = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("hail") == 0)
 								{
-									System.out.println("Found hail");
+									if (DEBUG)
+										System.out.println("Found hail");
 									wp.probabilityHail = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("damaging thunderstorm winds") == 0)
 								{
-									System.out.println("Found damaging thunderstorm winds");
+									if (DEBUG)
+										System.out.println("Found damaging thunderstorm winds");
 									wp.probabilityDamagingThunderstormWinds = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("extreme tornadoes") == 0)
 								{
-									System.out.println("Found extreme tornadoes");
+									if (DEBUG)
+										System.out.println("Found extreme tornadoes");
 									wp.probabilityExtremeTornadoes = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("extreme hail") == 0)
 								{
-									System.out.println("Found extreme hail");
+									if (DEBUG)
+										System.out.println("Found extreme hail");
 									wp.probabilityExtremeHail = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("extreme thunderstorm winds") == 0)
 								{
-									System.out.println("Found extreme thunderstorm winds");
+									if (DEBUG)
+										System.out.println("Found extreme thunderstorm winds");
 									wp.probabilityExtremeThunderstormWinds = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("severe thunderstorms") == 0)
 								{
-									System.out.println("Found severe thunderstorms");
+									if (DEBUG)
+										System.out.println("Found severe thunderstorms");
 									wp.probabilitySevereThunderstorm = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("extreme severe thunderstorms") == 0)
 								{
-									System.out.println("Found extreme severe thunderstorms");
+									if (DEBUG)
+										System.out.println("Found extreme severe thunderstorms");
 									wp.probabilityExtremeSevereThunderstorm = this.getValue(attribute);
 								}
 								else
 								{
-									System.out.println("Found something else? Given " + n.getNodeValue());
+									if (DEBUG)
+										System.out.println("Found something else? Given " + n.getNodeValue());
 								}
 								break;
 							}
@@ -350,7 +386,8 @@ public class NDFDConnection
 					}
 					else if (attribute.getNodeName().compareTo("humidity") == 0)
 					{
-						System.out.println("Found a humidity.");
+						if (DEBUG)
+							System.out.println("Found a humidity.");
 						// Humidity can be relative, max, or min.
 						for (int nodeIndex = 0;nodeIndex < attribute.getAttributes().getLength();nodeIndex++)
 						{
@@ -359,22 +396,26 @@ public class NDFDConnection
 							{
 								if (n.getNodeValue().compareTo("relative") == 0)
 								{
-									System.out.println("Found relative.");
+									if (DEBUG)
+										System.out.println("Found relative.");
 									wp.relativeHumidity = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("minimum relative") == 0)
 								{
-									System.out.println("Found minimum");
+									if (DEBUG)
+										System.out.println("Found minimum");
 									wp.minRelativeHumidity = this.getValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("maximum relative") == 0)
 								{
-									System.out.println("Found maximum.");
+									if (DEBUG)
+										System.out.println("Found maximum.");
 									wp.maxRelativeHumidity = this.getValue(attribute);
 								}
 								else
 								{
-									System.out.println("Found something else? Given " + n.getNodeValue());
+									if (DEBUG)
+										System.out.println("Found something else? Given " + n.getNodeValue());
 								}
 								break;
 							}
@@ -382,7 +423,8 @@ public class NDFDConnection
 					}
 					else
 					{
-						System.out.println("Ignoring: " + attribute.getNodeName());
+						if (DEBUG)
+							System.out.println("Ignoring: " + attribute.getNodeName());
 					}
 
 				}
@@ -408,6 +450,7 @@ public class NDFDConnection
 			e.printStackTrace();
 		}
 
+		System.out.println("Done parsing.");
 		return newPoints;
 	}
 
