@@ -27,7 +27,7 @@ public class NDFDConnection
 
 		// Start and End times to pull for.  Note, this has to be in the future (because it's a forecast database)
 		String beginTime = "2014-12-04T00:00:00";
-		String endTime = "2014-12-04T01:00:00";
+		String endTime = "2014-12-05T00:00:00";
 
 		// This is the list of zip codes that we want to pull.
 		// Specify multiple with the + operator. For instance, 87110+87111+87112
@@ -145,10 +145,11 @@ public class NDFDConnection
 							Node n = attribute.getAttributes().item(nodeIndex);
 							if (n.getNodeName().compareTo("type") == 0)
 							{
+								System.out.println("Found type attribute. >" + n.getNodeValue() + "<");
 								if (n.getNodeValue().compareTo("maximum") == 0)
 								{
 									System.out.println("Found maximum.");
-									// wp.maxTemp = Integer.parseInt(attribute.getChildNodes().item(0).getTextContent());
+									wp.maxTemp = this.getValue(attribute);
 									System.out.println("Maximum: " + wp.maxTemp);
 								}
 								else if (n.getNodeValue().compareTo("minimum") == 0)
@@ -388,5 +389,23 @@ public class NDFDConnection
 		}
 
 		return newPoints;
+	}
+
+	private int getValue(Node n)
+	{
+		int ret = -1;
+		for (int i = 0;i < n.getChildNodes().getLength();i++)
+		{
+			Node a = n.getChildNodes().item(i);
+			// System.out.println("Looking at child " + i + ", node name " + a.getNodeName() + ", node value " + a.getNodeValue()+", text content "+a.getTextContent());
+			if (a.getNodeName().compareTo("value") == 0)
+			{
+				ret = Integer.parseInt(a.getTextContent());
+				break;
+			}
+
+		}
+		// System.out.println("getValue: Returning "+ret);
+		return ret;
 	}
 }
