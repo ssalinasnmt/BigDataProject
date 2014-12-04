@@ -182,12 +182,12 @@ public class NDFDConnection
 								if (n.getNodeValue().compareTo("liquid") == 0)
 								{
 									System.out.println("Found liquid.");
-									wp.liquidPrecipitationAmount = this.getValue(attribute);
+									wp.liquidPrecipitationAmount = this.getFloatValue(attribute);
 								}
 								else if (n.getNodeValue().compareTo("snow") == 0)
 								{
 									System.out.println("Found snow");
-									wp.snowfallAmount = this.getValue(attribute);
+									wp.snowfallAmount = this.getFloatValue(attribute);
 								}
 								else
 								{
@@ -426,6 +426,26 @@ public class NDFDConnection
 
 		}
 		// System.out.println("getValue: Returning "+ret);
+		return ret;
+	}
+	private int getFloatValue(Node n)
+	{
+		int ret = -1;
+		float f = -1.0f;
+		for (int i = 0;i < n.getChildNodes().getLength();i++)
+		{
+			Node a = n.getChildNodes().item(i);
+			// System.out.println("Looking at child " + i + ", node name " + a.getNodeName() + ", node value " + a.getNodeValue()+", text content "+a.getTextContent());
+			if (a.getNodeName().compareTo("value") == 0)
+			{
+				f = Float.parseFloat(a.getTextContent());
+				break;
+			}
+
+		}
+		// System.out.println("getValue: Returning "+ret);
+		f = f * 100;
+		ret = Math.round(f);
 		return ret;
 	}
 }
