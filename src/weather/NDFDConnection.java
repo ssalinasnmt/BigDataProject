@@ -21,6 +21,11 @@ public class NDFDConnection
 {
 	private boolean DEBUG = false; // Set to true to see parser output.
 
+	/**
+	 * This connects to the NDFD database, and pulls the weather points.
+	 * 
+	 * @return Linked List of new weather points.
+	 */
 	public LinkedList <WeatherPoint> pullData()
 	{
 		LinkedList <WeatherPoint> newPoints = new LinkedList <WeatherPoint>();
@@ -454,6 +459,12 @@ public class NDFDConnection
 		return newPoints;
 	}
 
+	/**
+	 * This gets a value from the <value> of an XML node.
+	 * 
+	 * @param n Which node to search through looking for a value
+	 * @return Integer representation of the value, -1 if not found.
+	 */
 	private int getValue(Node n)
 	{
 		int ret = -1;
@@ -472,6 +483,12 @@ public class NDFDConnection
 		return ret;
 	}
 
+	/**
+	 * This gets an integer from a float <value> of an XML node.
+	 * 
+	 * @param n Node to search for, looking for value
+	 * @return Integer representation of the value * 100, -1 if not found.
+	 */
 	private int getFloatValue(Node n)
 	{
 		int ret = -1;
